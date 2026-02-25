@@ -54,20 +54,26 @@ Precision and recall are much more useful than accuracy because of the extreme c
 Of the total 284, 807 transactions, the model detected 2,849. The number of actual fraud cases in the data is 492. In the initial check, it's apparent that the model did as expected and detected about 1% of the anomalies (considering contamination was set to 0.01). 
 
 ## Baseline Metrics
-Precision: 0.10
-Recall: 0.59
-Fraud caught (TP): 289
-False positivies (FP): 2,560
-Total flagged: 2,849
-Workload reduction: n/a  
+
+| Metric | Value |
+|--------|-------|
+| Precision | 0.10 |
+| Recall | 0.59 |
+| Fraud caught (TP) | 289 |
+| False positives (FP) | 2,560 |
+| Total flagged | 2,849 |
+| Workload reduction | n/a |
 
 ## Tiered Risk Optimization
-Precision: 0.077
-Recall: 0.66
-Fraud caught (TP): 327
-False positivies (FP): 3,946
-Total flagged: 4,273
-Workload reduction: 50% fewer transactions flagged
+
+| Metric | Value |
+|--------|-------|
+| Precision | 0.077 |
+| Recall | 0.66 |
+| Fraud caught (TP) | 327 |
+| False positives (FP) | 3,946 |
+| Total flagged | 4,273 |
+| Workload reduction | 50% fewer transactions flagged |
 
 ## Limitations and Future Work
 * Add a supervised second-stage model on labeled data
