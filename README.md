@@ -1,5 +1,5 @@
 # transaction-anomaly-detection
-Transactional Anomaly Detection Using Isolation Forest Model
+Tiered Transactional Anomaly Detection Using Isolation Forest Model
 
 ## Project Overview
 This project uses an unsupervised anomaly detection model (Isolation Forest) to detect fraudulent transactions in real-world data.
@@ -24,6 +24,14 @@ An unsupervised approach was chosen due to the highly imbalanced nature of the d
 
 I excluded labels from training so that the model would learn patterns from the data itself and not be given the labels explicitly.  
 
+**Tiered Risk Optimization:**  
+To improve operational efficiency and reduce customer friction, transactions are classified into three risk tiers based on anomaly scores:  
+* **High** – Auto-flag for immediate investigation  
+* **Medium** – Manual review (borderline cases)  
+* **Low** – Automatically approved  
+
+High and Medium risk transactions are **reviewed manually**, so legitimate transactions are **not automatically blocked**, maintaining customer experience and reducing churn.
+
 ## Project Structure
 ```text
 src/
@@ -41,21 +49,30 @@ Isolation Forest outputs predictions as:
 *  -1 is anomaly
 *   1 is normal transaction
 
-Precision and recall are much more useful than accuracy because of the extreme class imbalance. A model that labels every transaction as normal would achieve high accuracy but would fail to detect fraud. Recall measures how many true anomalies are detected correctly. Precision measures how many flagged transactions are truly fraudulent. 
+Precision and recall are much more useful than accuracy because of the extreme class imbalance. A model that labels every transaction as normal would achieve high accuracy but would fail to detect fraud. Recall measures how many true anomalies (fraud) are detected correctly. Precision measures how many flagged transactions are truly fraudulent. 
 
 Of the total 284, 807 transactions, the model detected 2,849. The number of actual fraud cases in the data is 492. In the initial check, it's apparent that the model did as expected and detected about 1% of the anomalies (considering contamination was set to 0.01). 
 
-## Metrics
+## Baseline Metrics
 Precision: 0.10
-Recall:0.587
+Recall: 0.59
+Fraud caught (TP): 289
+False positivies (FP): 2,560
+Total flagged: 2,849
+Workload reduction: n/a  
 
-A Recall of ~59% means the model detects about 6 out of every 10 fraudulent transactions. This is a  very solid result for an unsupervised model at this stage. 
-
-A Precision of 10% means that 1 in every 10 flagged  transactions is actually fraud. That means a lot of false positives. At this stage, this is to be expected since the model trained with no labels or feature engineering. This model is a first stage filter which would reduce the search space significantly and then possibly lead to implementation of a supervised model on the remaining transactions. 
+## Tiered Risk Optimization
+Precision: 0.077
+Recall: 0.66
+Fraud caught (TP): 327
+False positivies (FP): 3,946
+Total flagged: 4,273
+Workload reduction: 50% fewer transactions flagged
 
 ## Limitations and Future Work
 * Add a supervised second-stage model on labeled data
 * Tune the contamination parameters based on business cost tradeoffs
+* Explore additional anomaly detection algorithms for higher sensitivity
 
 ## How to Run the Project
 python src/evaluate.py
