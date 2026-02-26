@@ -62,7 +62,7 @@ Of the total 284, 807 transactions, the model detected 2,849. The number of actu
 | Fraud caught (TP) | 289 |
 | False positives (FP) | 2,560 |
 | Total flagged | 2,849 |
-| Workload reduction | n/a |
+| Workload impact | n/a |
 
 ## Tiered Risk Optimization
 
@@ -73,7 +73,7 @@ Of the total 284, 807 transactions, the model detected 2,849. The number of actu
 | Fraud caught (TP) | 327 |
 | False positives (FP) | 3,946 |
 | Total flagged | 4,273 |
-| Workload reduction | 50% fewer transactions flagged |
+| Workload impact | 50% increase in review volume to achieve higher fraud recall |
 
 ## Limitations and Future Work
 * Add a supervised second-stage model on labeled data
